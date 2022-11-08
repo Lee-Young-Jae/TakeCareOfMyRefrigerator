@@ -49,7 +49,7 @@ const sizeStyles = css`
   `}
 `;
 
-const fullWidthStype = css`
+const fullWidthStyle = css`
   ${({ fullWidth }) =>
     fullWidth &&
     css`
@@ -78,7 +78,7 @@ const StyledButton = styled.button`
   ${colorStyles}
 
   /* 기타 */
-  ${fullWidthStype}
+  ${fullWidthStyle}
 `;
 
 const Button = ({ children, color, size, outline, fullWidth, ...rest }) => {
