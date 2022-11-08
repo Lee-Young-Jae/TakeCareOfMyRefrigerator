@@ -55,6 +55,9 @@ const InputStyle = styled(TextInput)`
 const ChildrenStyle = styled.div`
   position: absolute;
   right: 0;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #999;
 `;
 
 const LabeledInput = ({
