@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import shopping_cart_checkoutSVG from "../../SVG/shopping_cart_checkout.svg";
 import browse_activitySVG from "../../SVG/browse_activity.svg";
 import loginSVG from "../../SVG/login.svg";
@@ -73,7 +73,7 @@ const FooterMenu = () => {
             <span>홈</span>
           </FooterMenuLinkWrapper>
         </FooterMenuListItem>
-        <FooterMenuListItem to="/">
+        <FooterMenuListItem to="/checklist">
           <FooterMenuLinkWrapper>
             <FooterMenuImage
               src={shopping_cart_checkoutSVG}
