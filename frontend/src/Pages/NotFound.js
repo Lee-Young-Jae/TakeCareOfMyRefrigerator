@@ -30,8 +30,8 @@ const PageStateStyle = styled.div`
   border-radius: 2rem;
   font-weight: bold;
   font-size: 4rem;
-  color: #fff;
-  text-shadow: 0px 0.1875rem 1.25rem rgb(0 0 0 / 20%);
+  color: #ffffff;
+  text-shadow: 0px 0.2rem 1.2rem rgb(0 0 0 / 20%);
   text-align: center;
   align-self: flex-start;
   -webkit-animation: 0.75s ease vFs4e;
@@ -66,12 +66,10 @@ const PageStateWrapper = styled.div`
     position: absolute;
     display: block;
     top: 0;
-    left: calc(50% - 3.125rem);
+    left: calc(50% - 3.25rem);
     width: 5rem;
     height: 5rem;
     font-size: 3.2em;
-    text-shadow: 0px 0.1875rem 1.25rem rgb(0 0 0 / 20%);
-    color: #fff;
     background: ${({ theme }) => theme.palette.BRIGHT_BLUE};
     border-radius: 20px;
     transition: 1s;
@@ -99,7 +97,7 @@ const NotFound = () => {
         <br></br>
       </PageStateWrapper>
       <Link to="./">
-        <Button>홈으로</Button>
+        <Button fullWidth>홈으로</Button>
       </Link>
     </NotFoundStyle>
   );
