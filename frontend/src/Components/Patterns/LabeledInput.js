@@ -37,13 +37,13 @@ const LabeledInputStyle = styled.div`
 const LabelStyle = styled.label`
   position: absolute;
   top: 0;
-
   width: 100px;
   height: 40px;
   border-radius: 10px 10px 0px 0px;
   font-weight: 600;
   font-size: 0.8rem;
   z-index: 1;
+  cursor: pointer;
 `;
 
 const InputStyle = styled(TextInput)`
