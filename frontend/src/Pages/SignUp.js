@@ -74,7 +74,7 @@ const SignUp = () => {
         onChange={onChangeSignUpInformation}
         animation
       ></LabeledInput>
-      {signUpInformation.id && (
+      {signUpInformation.id?.length >= 3 && (
         <LabeledInput
           inputName="password"
           labelText="비밀번호"
@@ -91,7 +91,7 @@ const SignUp = () => {
           ></input>
         </LabeledInput>
       )}
-      {signUpInformation.password && (
+      {signUpInformation.password?.length >= 3 && (
         <LabeledInput
           inputName="againPassword"
           labelText="비밀번호 확인"
@@ -108,17 +108,18 @@ const SignUp = () => {
           ></input>
         </LabeledInput>
       )}
-      {signUpInformation.againPassword && (
-        <LabeledInput
-          inputName="nickname"
-          labelText="닉네임"
-          autoComplete="off"
-          onChange={onChangeSignUpInformation}
-          animation
-        ></LabeledInput>
-      )}
+      {signUpInformation.againPassword?.length >= 3 &&
+        signUpInformation.againPassword === signUpInformation.password && (
+          <LabeledInput
+            inputName="nickname"
+            labelText="닉네임"
+            autoComplete="off"
+            onChange={onChangeSignUpInformation}
+            animation
+          ></LabeledInput>
+        )}
 
-      {signUpInformation.nickname && (
+      {signUpInformation.nickname?.length >= 2 && (
         <ButtonStyle fullWidth>회원가입</ButtonStyle>
       )}
     </SignUpStyle>
