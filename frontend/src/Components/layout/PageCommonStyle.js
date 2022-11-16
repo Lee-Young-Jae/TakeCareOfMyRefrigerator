@@ -5,8 +5,8 @@ const PageCommonStyle = styled.div`
   align-items: center;
   background: #ffffff;
   font-weight: 600;
-  padding-top: 40%;
-  margin: 1rem 5rem;
+  margin: 5rem 0;
+  padding: 10rem 5rem;
 `;
 
 export default PageCommonStyle;
