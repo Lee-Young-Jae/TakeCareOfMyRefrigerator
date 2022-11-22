@@ -98,7 +98,7 @@ const StyleMainWordWrapper = styled.div`
   margin: 2rem 0 0 0;
 `;
 
-const mainWordList = ["신선한", "보고싶은", "정갈한", "매력적인"];
+const mainWordList = ["신선한", "보고싶은", "알뜰한", "매력적인"];
 const Main = () => {
   return (
     <MainStyle>
