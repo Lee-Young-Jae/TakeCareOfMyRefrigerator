@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
   res.status(201).send("서버 살아 있음!");
 });
 
-app.use("/api/user", userRouter);
+app.use("/user", userRouter);
 
 app.listen(3070, () => {
   console.log("BackEnd Server Running!!");
