@@ -2,6 +2,10 @@ import produce from "immer";
 
 const initialState = {
   state: {
+    loadMeLoading: false, // 내정보 불러오기 시도중
+    loadMeDone: false,
+    loadMeError: null,
+
     signUpLoading: false, // 회원가입 시도중
     signUpDone: false,
     signUpError: null,
@@ -9,19 +13,20 @@ const initialState = {
     logInLoading: false, // 로그인 시도중
     logInDone: false,
     logInError: null,
+
     logOutLoading: false, // 회원가입 시도중
     logOutDone: false,
     logOutError: null,
-
-    loadMeLoading: false, // 내정보 불러오기 시도중
-    loadMeDone: false,
-    loadMeError: null,
   },
   me: {},
 };
 
 /* 액션 타입 만들기 */
 export const INIT = "INIT";
+
+export const LOAD_ME_REQUEST = "LOAD_ME_REQUEST";
+export const LOAD_ME_SUCCESS = "LOAD_ME_SUCCESS";
+export const LOAD_ME_FAILURE = "LOAD_ME_FAILURE";
 
 export const USER_SIGNUP_REQUEST = "USER_SIGNUP_REQUEST";
 export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS";
@@ -35,10 +40,6 @@ export const USER_LOGOUT_REQUEST = "USER_LOGOUT_REQUEST";
 export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
 export const USER_LOGOUT_FAILURE = "USER_LOGOUT_FAILURE";
 
-export const LOAD_ME_REQUEST = "LOAD_ME_REQUEST";
-export const LOAD_ME_SUCCESS = "LOAD_ME_SUCCESS";
-export const LOAD_ME_FAILURE = "LOAD_ME_FAILURE";
-
 /* 리듀서 선언 */
 
 const reducer = (state = initialState, action) => {
@@ -46,6 +47,23 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
       case INIT:
         draft.user = action.data;
+        break;
+
+      case LOAD_ME_REQUEST:
+        draft.state.loadMeLoading = true;
+        draft.state.loadMeDone = false;
+        draft.state.loadMeError = null;
+        draft.state.signUpDone = false; //signUp 초기화
+        draft.state.logOutDone = false; // 로그아웃 Done 초기화
+        break;
+      case LOAD_ME_SUCCESS:
+        draft.state.loadMeLoading = false;
+        draft.state.loadMeDone = true;
+        draft.state.loadMeError = null;
+        draft.me = action.data;
+        break;
+      case LOAD_ME_FAILURE:
+        draft.state.loadMeError = action.error;
         break;
 
       case USER_SIGNUP_REQUEST:
@@ -57,11 +75,12 @@ const reducer = (state = initialState, action) => {
         draft.state.signUpLoading = false;
         draft.state.signUpDone = true;
         draft.state.signUpError = null;
-        // draft.me = action.data;
+        draft.me = action.data;
         break;
       case USER_SIGNUP_FAILURE:
         draft.state.signUpError = action.error;
         break;
+
       case USER_LOGIN_REQUEST:
         draft.state.logInLoading = true;
         draft.state.logInDone = false;
@@ -71,6 +90,8 @@ const reducer = (state = initialState, action) => {
         draft.state.logInLoading = false;
         draft.state.logInDone = true;
         draft.state.logInError = null;
+        draft.state.signUpDone = false; // 회원가입 초기화
+        draft.state.signUpError = null; // 회원가입 초기화
         draft.me = action.data;
         break;
       case USER_LOGIN_FAILURE:
@@ -86,28 +107,12 @@ const reducer = (state = initialState, action) => {
         draft.state.logOutLoading = false;
         draft.state.logOutDone = true;
         draft.state.logOutError = null;
+        draft.state.logInDone = false; // 로그인 초기화
+
         draft.me = {};
         break;
       case USER_LOGOUT_FAILURE:
         draft.state.logOutError = action.error;
-        break;
-
-      case LOAD_ME_REQUEST:
-        draft.state.loadMeLoading = true;
-        draft.state.loadMeDone = false;
-        draft.state.loadMeError = null;
-        draft.state.loadChartInfoDone = false; //LoadChartInfo 초기화 (새로고침시 오류)
-        draft.state.signUpDone = false; //signUp 초기화
-        draft.state.logOutDone = false; // 로그아웃 Done 초기화
-        break;
-      case LOAD_ME_SUCCESS:
-        draft.state.loadMeLoading = false;
-        draft.state.loadMeDone = true;
-        draft.state.loadMeError = null;
-        draft.me = action.data;
-        break;
-      case LOAD_ME_FAILURE:
-        draft.state.loadMeError = action.error;
         break;
 
       default:

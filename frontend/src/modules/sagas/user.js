@@ -1,4 +1,4 @@
-import { all, fork, takeLatest, put, call, take } from "redux-saga/effects";
+import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 import axios from "axios";
 import {
   LOAD_ME_FAILURE,
@@ -16,7 +16,7 @@ import {
 } from "../reducers/user";
 
 function loadMeAPI(data) {
-  return axios.get(`/api/user/load`);
+  return axios.get(`/user/load`);
 }
 
 function* loadMe(action) {
@@ -35,7 +35,7 @@ function* loadMe(action) {
 }
 
 function signUpAPI(data) {
-  return axios.post("/api/user/signup", data);
+  return axios.post("/user/signup", data);
 }
 
 function* signUp(action) {
@@ -55,7 +55,7 @@ function* signUp(action) {
 }
 
 function LogInAPI(data) {
-  return axios.post("/api/user/login", data);
+  return axios.post("/user/login", data);
 }
 
 function* logIn(action) {
@@ -75,7 +75,7 @@ function* logIn(action) {
 }
 
 function logOutAPI(data) {
-  return axios.post(`/api/user/logout`);
+  return axios.post(`/user/logout`);
 }
 
 function* logOut(action) {
