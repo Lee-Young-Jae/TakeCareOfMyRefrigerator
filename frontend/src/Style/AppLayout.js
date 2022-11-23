@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import HeadMenu from "../Components/layout/HeadMenu";
 import styled from "styled-components";
-import Dialog from "../Components/common/Dialog";
 import FooterMenu from "../Components/layout/FooterMenu";
 
 const AppLayoutStyle = styled.div`
@@ -43,18 +42,6 @@ const AppBodyStyle = styled.div`
 `;
 
 const AppLayout = ({ children }) => {
-  const [dialog, setDialog] = useState(false);
-
-  const onConfirm = () => {
-    console.log("확인");
-    setDialog(false);
-  };
-
-  const onCancel = () => {
-    console.log("취소");
-    setDialog(false);
-  };
-
   return (
     <AppLayoutStyle>
       <AppBodyWrapperStyle>
@@ -63,14 +50,6 @@ const AppLayout = ({ children }) => {
           {children}
           <FooterMenu></FooterMenu>
         </AppBodyStyle>
-        <Dialog
-          title="정말로 삭제하시겠습니까?"
-          visible={dialog}
-          onCancel={onCancel}
-          onConfirm={onConfirm}
-        >
-          데이터를 정말로 삭제하시겠습니까?
-        </Dialog>
       </AppBodyWrapperStyle>
     </AppLayoutStyle>
   );
