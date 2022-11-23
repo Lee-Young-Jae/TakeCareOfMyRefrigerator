@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const HeadMenuStyle = styled.h1`
   position: fixed;
@@ -13,13 +14,17 @@ const HeadMenuStyle = styled.h1`
   box-shadow: 0px 1px 0px #00000014;
   border-radius: 10px 10px 0px 0px;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   z-index: 1;
   backdrop-filter: blur(5px);
 `;
 
 const HeadMenu = ({ children }) => {
-  return <HeadMenuStyle>Title이 표시됩니다.</HeadMenuStyle>;
+  const { me } = useSelector((state) => state.user);
+
+  return (
+    <HeadMenuStyle>{me?.nickname ? `"${me.nickname}" 의 냉장고` : "냉장고를 부탁해"}</HeadMenuStyle>
+  );
 };
 
 export default HeadMenu;
