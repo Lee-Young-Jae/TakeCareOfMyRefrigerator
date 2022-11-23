@@ -1,9 +1,13 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Button from "../Components/common/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import PageCommonStyle from "../Components/layout/PageCommonStyle";
 import LabeledInput from "../Components/Patterns/LabeledInput";
+import { USER_SIGNUP_REQUEST } from "../modules/reducers/user";
+import Dialog from "../Components/common/Dialog";
 
 const slideUp = keyframes`
   from {
@@ -63,6 +67,46 @@ const SignUp = () => {
     [showOriginalPassword]
   );
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { signUpDone, signUpError } = useSelector((state) => state.user.state);
+
+  useEffect(() => {
+    if (signUpDone) {
+      setDialog(true);
+      setDialogMessage("회원가입이 완료되었습니다😊");
+    }
+    if (signUpError) {
+      setDialog(true);
+      setDialogMessage(signUpError + "😥");
+    }
+  }, [signUpDone, signUpError, navigate]);
+
+  const onClickSignUpButton = () => {
+    dispatch({
+      type: USER_SIGNUP_REQUEST,
+      data: {
+        loginId: signUpInformation.id,
+        password: signUpInformation.password,
+        nickname: signUpInformation.nickname,
+      },
+    });
+  };
+
+  const [dialog, setDialog] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
+  const onConfirm = () => {
+    setDialog(false);
+
+    if (signUpDone) {
+      navigate("/login");
+    }
+  };
+
+  const onCancel = () => {
+    setDialog(false);
+  };
+
   return (
     <SignUpStyle>
       <LabeledInput
@@ -120,8 +164,19 @@ const SignUp = () => {
         )}
 
       {signUpInformation.nickname?.length >= 2 && (
-        <ButtonStyle fullWidth>회원가입</ButtonStyle>
+        <ButtonStyle fullWidth onClick={onClickSignUpButton}>
+          회원가입
+        </ButtonStyle>
       )}
+      <Dialog
+        onlyConfirm
+        title="내 냉장고를 부탁해"
+        visible={dialog}
+        onCancel={onCancel}
+        onConfirm={onConfirm}
+      >
+        {dialogMessage}
+      </Dialog>
     </SignUpStyle>
   );
 };
