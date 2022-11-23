@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 import Button from "../Components/common/Button";
@@ -86,14 +86,16 @@ const SubTitle = styled.h2`
 `;
 
 const NotFound = () => {
+  useEffect(() => {
+    document.title = "404 Not Found";
+  }, []);
   return (
     <NotFoundStyle>
       <PageStateWrapper>
         <PageStateStyle>404</PageStateStyle>
         <br></br>
         <SubTitle>Not Found</SubTitle>
-        <br></br>
-        <p>찾을 수 없는 페이지입니다.</p>
+        <p>기능이 아직 구현 중이거나 찾을 수 없는 페이지예요</p>
         <br></br>
       </PageStateWrapper>
       <Link to="./">
