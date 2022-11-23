@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import styled from "styled-components";
 import shopping_cart_checkoutSVG from "../../SVG/shopping_cart_checkout.svg";
@@ -64,6 +65,8 @@ const FooterMenuImage = styled.img`
 `;
 
 const FooterMenu = () => {
+  const { me } = useSelector((state) => state.user);
+
   return (
     <FooterMenuStyle>
       <FooterMenuList>
@@ -73,7 +76,7 @@ const FooterMenu = () => {
             <span>홈</span>
           </FooterMenuLinkWrapper>
         </FooterMenuListItem>
-        <FooterMenuListItem to="/checklist">
+        <FooterMenuListItem to="/shopcart">
           <FooterMenuLinkWrapper>
             <FooterMenuImage
               src={shopping_cart_checkoutSVG}
@@ -83,20 +86,17 @@ const FooterMenu = () => {
           </FooterMenuLinkWrapper>
         </FooterMenuListItem>
 
-        <FooterMenuListItem to="/">
+        <FooterMenuListItem to="/myrefrigerator">
           <FooterMenuLinkWrapper>
-            <FooterMenuImage
-              src={browse_activitySVG}
-              alt={"browse_activitySVG"}
-            ></FooterMenuImage>
+            <FooterMenuImage src={browse_activitySVG} alt={"browse_activitySVG"}></FooterMenuImage>
             <span>내 냉장고</span>
           </FooterMenuLinkWrapper>
         </FooterMenuListItem>
 
-        <FooterMenuListItem to="/login">
+        <FooterMenuListItem to={me?.id ? "/logout" : "/login"}>
           <FooterMenuLinkWrapper>
             <FooterMenuImage src={loginSVG} alt={"loginSVG"}></FooterMenuImage>
-            <span>로그인</span>
+            {me?.id ? <span>로그아웃</span> : <span>로그인</span>}
           </FooterMenuLinkWrapper>
         </FooterMenuListItem>
       </FooterMenuList>
