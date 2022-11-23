@@ -40,6 +40,7 @@ const slideDown = keyframes`
 `;
 
 const DarkBackground = styled.div`
+  z-index: 100;
   position: fixed;
   left: 0;
   top: 0;
@@ -98,6 +99,7 @@ const Dialog = ({
   onConfirm,
   visible,
   onClickBackground,
+  onlyConfirm,
   ...rest
 }) => {
   const [animate, setAnimate] = useState(false);
@@ -119,9 +121,11 @@ const Dialog = ({
         <h3>{title}</h3>
         <p>{children}</p>
         <ButtonGroup>
-          <Button color="GRAY" onClick={onCancel}>
-            {cancelText}
-          </Button>
+          {onlyConfirm || (
+            <Button color="GRAY" onClick={onCancel}>
+              {cancelText}
+            </Button>
+          )}
           <Button color="TEAL" onClick={onConfirm}>
             {confirmText}
           </Button>
