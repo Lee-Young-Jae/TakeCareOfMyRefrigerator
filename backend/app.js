@@ -11,6 +11,7 @@ const path = require("path");
 dotenv.config();
 
 const userRouter = require("./routes/user");
+const shoppingRouter = require("./routes/shopping");
 
 const app = express();
 // npx sequelize db:create  //데이터베이스 생성
@@ -48,6 +49,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", userRouter);
+app.use("/shopping", shoppingRouter);
 
 app.listen(3070, () => {
   console.log("BackEnd Server Running!!");
