@@ -105,7 +105,7 @@ const Main = () => {
       <Reduction></Reduction>
       <StyleMainWordWrapper>
         {mainWordList.map((word) => (
-          <FlowWord>{`"${word}"`}</FlowWord>
+          <FlowWord key={word}>{`"${word}"`}</FlowWord>
         ))}
       </StyleMainWordWrapper>
       <br></br>
