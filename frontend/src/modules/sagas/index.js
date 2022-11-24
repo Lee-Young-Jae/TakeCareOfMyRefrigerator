@@ -1,5 +1,6 @@
 import { all, fork } from "redux-saga/effects";
 import userSaga from "./user";
+import shoppingSaga from "./shopping";
 
 import axios from "axios";
 
@@ -10,6 +11,6 @@ axios.defaults.withCredentials = true; //사가에서 보내는 axios 요청들�
 // ============ 이벤트 등록 ============
 export default function* rootSaga() {
   //비동기 액션 추가.
-  yield all([fork(userSaga)]);
+  yield all([fork(userSaga), fork(shoppingSaga)]);
 }
 // ====================================
