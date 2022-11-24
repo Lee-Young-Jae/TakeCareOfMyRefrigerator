@@ -32,9 +32,29 @@ const LabeledInputStyle = styled.div`
 
   /** 애니메이션 */
   ${animationStyle}
+
+  // fullwidth 설정
+  ${({ fullWidth }) => {
+    return (
+      fullWidth &&
+      css`
+        width: 100%;
+        display: inline-block;
+      `
+    );
+  }}
 `;
 
 const LabelStyle = styled.label`
+  ${({ noneLabel }) => {
+    return (
+      noneLabel &&
+      css`
+        display: none;
+      `
+    );
+  }}
+
   position: absolute;
   top: 0;
   width: 100px;
@@ -42,7 +62,6 @@ const LabelStyle = styled.label`
   border-radius: 10px 10px 0px 0px;
   font-weight: 600;
   font-size: 0.8rem;
-  z-index: 1;
   cursor: pointer;
 `;
 
@@ -50,6 +69,7 @@ const InputStyle = styled(TextInput)`
   &:invalid {
     color: #ff000080;
   }
+  padding: 0;
 `;
 
 const ChildrenStyle = styled.div`
@@ -68,11 +88,15 @@ const LabeledInput = ({
   autoComplete,
   slideup,
   animation,
+  noneLabel,
+  fullWidth,
   ...rest
 }) => {
   return (
-    <LabeledInputStyle animation={animation}>
-      <LabelStyle htmlFor={inputName}>{labelText}</LabelStyle>
+    <LabeledInputStyle animation={animation} fullWidth={fullWidth}>
+      <LabelStyle noneLabel={noneLabel} htmlFor={inputName}>
+        {labelText}
+      </LabelStyle>
       <InputStyle
         id={inputName}
         type={inputType}
