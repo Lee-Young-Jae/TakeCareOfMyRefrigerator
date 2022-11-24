@@ -1,5 +1,7 @@
 // Date를 ---년 00월 00일 로 반환
-export const getDateString = (date) => {
+export const getDateString = (input) => {
+  const date = new Date(input);
+
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
