@@ -25,11 +25,24 @@ const initialState = {
     deleteCartLoading: false, // 장바구니 삭제 시도중
     deleteCartDone: false,
     deleteCartError: null,
+
+    loadIngredientLoading: false, //냉장고 재료 불러오기 시도중
+    loadIngredientDone: false,
+    loadIngredientError: null,
+
+    createIngredientLoading: false, // 냉장고 재료 생성 시도중
+    createIngredientDone: false,
+    createIngredientError: null,
+
+    deleteIngredientLoading: false, // 냉장고 재료 삭제 시도중
+    deleteIngredientDone: false,
+    deleteIngredientError: null,
   },
   shoppingList: [],
   cart: {
     ShoppingId: null,
     cart: [],
+    fridge: [],
   },
 };
 
@@ -59,6 +72,18 @@ export const CREATE_CART_FAILURE = "CREATE_CART_FAILURE";
 export const DELETE_CART_REQUEST = "DELETE_CART_REQUEST";
 export const DELETE_CART_SUCCESS = "DELETE_CART_SUCCESS";
 export const DELETE_CART_FAILURE = "DELETE_CART_FAILURE";
+
+export const LOAD_INGREDIENT_REQUEST = "LOAD_INGREDIENT_REQUEST";
+export const LOAD_INGREDIENT_SUCCESS = "LOAD_INGREDIENT_SUCCESS";
+export const LOAD_INGREDIENT_FAILURE = "LOAD_INGREDIENT_FAILURE";
+
+export const CREATE_INGREDIENT_REQUEST = "CREATE_INGREDIENT_REQUEST";
+export const CREATE_INGREDIENT_SUCCESS = "CREATE_INGREDIENT_SUCCESS";
+export const CREATE_INGREDIENT_FAILURE = "CREATE_INGREDIENT_FAILURE";
+
+export const DELETE_INGREDIENT_REQUEST = "DELETE_INGREDIENT_REQUEST";
+export const DELETE_INGREDIENT_SUCCESS = "DELETE_INGREDIENT_SUCCESS";
+export const DELETE_INGREDIENT_FAILURE = "DELETE_INGREDIENT_FAILURE";
 
 /* 리듀서 선언 */
 
