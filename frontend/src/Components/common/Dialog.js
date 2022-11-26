@@ -69,7 +69,7 @@ const DialogBlock = styled.div`
     font-size: 1.5rem;
     font-weight: 600;
   }
-  p {
+  div {
     font-size: 1.125rem;
   }
   animation: ${slideUp} 0.25s ease-out forwards;
@@ -119,7 +119,7 @@ const Dialog = ({
     <DarkBackground disappear={!visible} onClick={onClickBackground}>
       <DialogBlock disappear={!visible}>
         <h3>{title}</h3>
-        <p>{children}</p>
+        <div>{children}</div>
         <ButtonGroup>
           {onlyConfirm || (
             <Button color="GRAY" onClick={onCancel}>
