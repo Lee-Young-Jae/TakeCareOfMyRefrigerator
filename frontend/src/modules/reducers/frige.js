@@ -104,7 +104,7 @@ const reducer = (state = initialState, action) => {
         draft.state.deleteFrigeLoading = false;
         draft.state.deleteFrigeDone = true;
         draft.state.deleteFrigeError = null;
-        draft.user = action.data;
+        draft.frige = action.data;
         break;
       case DELETE_FRIGE_FAILURE:
         draft.state.deleteFrigeLoading = false;
@@ -121,7 +121,7 @@ const reducer = (state = initialState, action) => {
         draft.state.loadRecipeLoading = false;
         draft.state.loadRecipeDone = true;
         draft.state.loadRecipeError = null;
-        draft.user = action.data;
+        draft.recipes = action.data;
         break;
       case LOAD_RECIPE_FAILURE:
         draft.state.loadRecipeLoading = false;
