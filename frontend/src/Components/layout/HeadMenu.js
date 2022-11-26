@@ -23,7 +23,7 @@ const HeadMenu = ({ children }) => {
   const { me } = useSelector((state) => state.user);
 
   return (
-    <HeadMenuStyle>{me?.nickname ? `"${me.nickname}" 의 냉장고` : "냉장고를 부탁해"}</HeadMenuStyle>
+    <HeadMenuStyle>{me?.nickname ? `${me.nickname}의 냉장고` : "냉장고를 부탁해"}</HeadMenuStyle>
   );
 };
 
