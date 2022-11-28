@@ -179,4 +179,53 @@ router.delete("/cart/:id", async (req, res, next) => {
   }
 });
 
+// localhost:3070//shopping/ingredients/cart/ POST
+router.post("/ingredients/cart/", async (req, res, next) => {
+  try {
+    const { name, lackIngredients } = req.body;
+
+    if (!name || name === "") {
+      return res.status(401).send("장바구니명이 없습니다.");
+    }
+
+    if (!req.user) {
+      return res.status(401).send("로그인이 필요합니다.");
+    }
+
+    const shopping = await Shopping.create({
+      name,
+    });
+
+    await shopping.setUser(req.user.id);
+
+    lackIngredients.forEach(async (ingredient) => {
+      if (!ingredient || ingredient === "") {
+        return res.status(401).send("재료명이 없습니다.");
+      }
+
+      if (ingredient.length > 20) {
+        ingredient = ingredient.slice(0, 20);
+      }
+
+      const cart = await Cart.create({
+        name: ingredient,
+      });
+
+      await cart.setShopping(shopping.id);
+    });
+
+    const allShopping = await Shopping.findAll({
+      where: {
+        userId: req.user.id,
+      },
+      order: [["createdAt", "DESC"]],
+    });
+
+    res.status(201).send(allShopping);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 module.exports = router;
