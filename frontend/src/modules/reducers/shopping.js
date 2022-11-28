@@ -37,6 +37,10 @@ const initialState = {
     deleteIngredientLoading: false, // 냉장고 재료 삭제 시도중
     deleteIngredientDone: false,
     deleteIngredientError: null,
+
+    addLackIngredientsLoading: false, // 부족한 재료 장바구니 만들기 시도중
+    addLackIngredientsDone: false,
+    addLackIngredientsError: null,
   },
   shoppingList: [],
   cart: {
@@ -84,6 +88,10 @@ export const CREATE_INGREDIENT_FAILURE = "CREATE_INGREDIENT_FAILURE";
 export const DELETE_INGREDIENT_REQUEST = "DELETE_INGREDIENT_REQUEST";
 export const DELETE_INGREDIENT_SUCCESS = "DELETE_INGREDIENT_SUCCESS";
 export const DELETE_INGREDIENT_FAILURE = "DELETE_INGREDIENT_FAILURE";
+
+export const ADD_LACK_INGREDIENTS_REQUEST = "ADD_LACK_INGREDIENTS_REQUEST";
+export const ADD_LACK_INGREDIENTS_SUCCESS = "ADD_LACK_INGREDIENTS_SUCCESS";
+export const ADD_LACK_INGREDIENTS_FAILURE = "ADD_LACK_INGREDIENTS_FAILURE";
 
 /* 리듀서 선언 */
 
@@ -194,6 +202,24 @@ const reducer = (state = initialState, action) => {
         draft.state.deleteCartLoading = false;
         draft.state.deleteCartDone = false;
         draft.state.deleteCartError = action.error;
+        break;
+
+      case LOAD_INGREDIENT_REQUEST:
+        draft.state.loadIngredientLoading = true;
+        draft.state.loadIngredientDone = false;
+        draft.state.loadIngredientError = null;
+        break;
+
+      case LOAD_INGREDIENT_SUCCESS:
+        draft.state.loadIngredientLoading = false;
+        draft.state.loadIngredientDone = true;
+        draft.state.loadIngredientError = null;
+        break;
+
+      case LOAD_INGREDIENT_FAILURE:
+        draft.state.loadIngredientLoading = false;
+        draft.state.loadIngredientDone = false;
+        draft.state.loadIngredientError = action.error;
         break;
 
       default:
