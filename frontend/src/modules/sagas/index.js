@@ -6,7 +6,7 @@ import frigeSaga from "./frige";
 import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:3070";
-// axios.defaults.baseURL = "http://10.20.13.213:3065";
+// axios.defaults.baseURL = "http://192.168.0.8:3070";
 axios.defaults.withCredentials = true; //사가에서 보내는 axios 요청들엔 withCredentials가 true로 공통적으로 들어간다. 서버와 쿠키 전달을 위함
 
 // ============ 이벤트 등록 ============
