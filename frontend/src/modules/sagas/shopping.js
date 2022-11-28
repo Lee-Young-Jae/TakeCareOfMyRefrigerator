@@ -1,6 +1,9 @@
 import { all, fork, takeLatest, put, call } from "redux-saga/effects";
 import axios from "axios";
 import {
+  ADD_LACK_INGREDIENTS_FAILURE,
+  ADD_LACK_INGREDIENTS_REQUEST,
+  ADD_LACK_INGREDIENTS_SUCCESS,
   CREATE_CART_FAILURE,
   CREATE_CART_REQUEST,
   CREATE_CART_SUCCESS,
@@ -140,6 +143,26 @@ function* deleteCart(action) {
   }
 }
 
+function addLackIngredientsAPI(data) {
+  return axios.post(`/shopping/ingredients/cart`, data);
+}
+
+function* addLackIngredients(action) {
+  try {
+    const result = yield call(addLackIngredientsAPI, action.data);
+
+    yield put({
+      type: ADD_LACK_INGREDIENTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    yield put({
+      type: ADD_LACK_INGREDIENTS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchLoadShoppingList() {
   yield takeLatest(LOAD_SHOPPING_LIST_REQUEST, loadShoppingList);
 }
@@ -164,6 +187,10 @@ function* watchDeleteCart() {
   yield takeLatest(DELETE_CART_REQUEST, deleteCart);
 }
 
+function* watchAddLackIngredients() {
+  yield takeLatest(ADD_LACK_INGREDIENTS_REQUEST, addLackIngredients);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLoadShoppingList),
@@ -172,5 +199,6 @@ export default function* userSaga() {
     fork(watchLoadCart),
     fork(watchCreateCart),
     fork(watchDeleteCart),
+    fork(watchAddLackIngredients),
   ]);
 }
