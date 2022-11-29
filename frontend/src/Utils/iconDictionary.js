@@ -3,6 +3,11 @@
  */
 
 export const iconDictionary = Object.freeze({
+  생수: "🥤",
+  소금: "🧂",
+  후추: "🌶",
+  솔트: "🧂",
+
   맥주: "🍺",
   와인: "🍷",
   소주: "🥃",
@@ -13,7 +18,7 @@ export const iconDictionary = Object.freeze({
   문어: "🐙",
   랍스터: "🦞",
   포도: "🍇",
-  가루: "🌾",
+  가루: "🧂",
   치킨: "🍗",
   돼지: "🐖",
   고기: "🥩",
