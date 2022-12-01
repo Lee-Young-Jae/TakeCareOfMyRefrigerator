@@ -80,9 +80,11 @@ const FridgeIngredient = ({ id, name, expiration, category, registedDate, onCont
   const [diffDate, setDiffDate] = useState(getDiffDate(expiration, registedDate));
 
   const navigation = useNavigate();
+
   useEffect(() => {
-    setDiffDate(getDiffDate(expiration, registedDate));
-  }, [expiration, registedDate]);
+    const now = new Date();
+    setDiffDate(getDiffDate(expiration, now));
+  }, [expiration]);
 
   //Dialog
 
